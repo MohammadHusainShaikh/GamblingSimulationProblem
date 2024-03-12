@@ -14,10 +14,13 @@ public class GamblingSimlation {
 		private static int[] winningAmount_PerDay = new int[20];
 		private static int[] loosingAmount_PerDay = new int [20];
 		
+		private static int winDays = 0;
+		private static int lostDays = 0;
+		
 		public static void gameStatus() {
 			System.out.println("The Stake per day is: " +STACK_PER_DAY);
 			System.out.println("The Bet per game is: " +BET_PER_GAME);
-			//System.out.println("The Bet per game is: " +LOOSE);
+			
 		}
 		
 		public static void gamePlay() {
@@ -40,15 +43,11 @@ public class GamblingSimlation {
 					winStack += 1;
 				}
 				if(winStack == STACK_PER_DAY / 2) {
+					winDays ++;
 					break;
 				}
 				if(looseStack == STACK_PER_DAY / 2) {
-					break;
-				}
-				if(winStack == 50) {
-					break;
-				}
-				if(looseStack == 50) {
+					lostDays ++;
 					break;
 				}
 			}
@@ -57,11 +56,16 @@ public class GamblingSimlation {
 			loosingAmount_PerDay[i] = looseStack;
 			
 			
-			System.out.println("Winnig Stack "+(i+1)+" :  " +winStack);
-			System.out.println("Loosing Stack "+(i+1)+" : " +looseStack);	
+	//		System.out.println("Winnig Stack on Day"+(i+1)+" :  " +winStack);
+	//		System.out.println("Loosing Stack on Day "+(i+1)+" : " +looseStack);
+			System.out.println("Winning Amount"+winningAmount_PerDay[i]);
+			System.out.println("Loosing Amount"+loosingAmount_PerDay[i]);
+			
 			System.out.println("------------------------");
 			
 			}
+				System.out.println("Wining days in month"+winDays);
+				System.out.println("Loosing days in month"+lostDays);
 		}
 		public static void main(String[] args) {
 			System.out.println("Welcome to Gambling Simulation Problem developed by Mohammad Husain");
