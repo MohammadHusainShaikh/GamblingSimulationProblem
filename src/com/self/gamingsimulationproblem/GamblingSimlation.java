@@ -1,6 +1,7 @@
 package com.self.gamingsimulationproblem;
 
 import java.util.Random;
+import java.util.Scanner;
 public class GamblingSimlation {
 
 
@@ -25,66 +26,76 @@ public class GamblingSimlation {
 		}
 		
 		public static void gamePlay() {
+			int playForNextMonth;
 			
-			
-		for(int i =0; i < MONTHLY_STACK; i++) 
-		{
-			
-			System.out.println("Day = "+(i+1));
-			gameStatus();
-			int winStack = 0;
-			int looseStack = 0;
-			while(true) {
+		do{	
+			for(int i =0; i < MONTHLY_STACK; i++) 
+			{
 				
-				Random random = new Random();
-				int playStatus = random.nextInt(9)%2;
-				if(playStatus == LOOSE) {
-					looseStack += 1;
-				}else {
-					winStack += 1;
-				}
-				if(winStack == STACK_PER_DAY / 2) {
-					winDays ++;
-					break;
-				}
-				if(looseStack == STACK_PER_DAY / 2) {
-					lostDays ++;
-					break;
-				}
-			}
-			
-			winningAmount_PerDay[i] = winStack;
-			loosingAmount_PerDay[i] = looseStack;
-			
-			
-			//System.out.println("Winnig Stack on Day"+(i+1)+" :  " +winStack);
-			//System.out.println("Loosing Stack on Day "+(i+1)+" : " +looseStack);
-			System.out.println("Winning Amount"+winningAmount_PerDay[i]);
-			System.out.println("Loosing Amount"+loosingAmount_PerDay[i]);
-			
-			
-			System.out.println("------------------------");
-			
-			}
-				System.out.println("Wining days in month "+winDays);
-				System.out.println("Loosing days in month "+lostDays);
-				
-				int luckiestDay = winStatus[0];
-				int unluckiestDay = looseStatus[0];
-				
-				
-				for(int i = 1; i < MONTHLY_STACK; i++) {
-					winStatus[i] = winningAmount_PerDay[i] - loosingAmount_PerDay[i];
-					if(winStatus[i] > luckiestDay) {
-						luckiestDay = winStatus[i];
+				System.out.println("Day = "+(i+1));
+				gameStatus();
+				int winStack = 0;
+				int looseStack = 0;
+				while(true) {
+					
+					Random random = new Random();
+					int playStatus = random.nextInt(9)%2;
+					if(playStatus == LOOSE) {
+						looseStack += 1;
+					}else {
+						winStack += 1;
 					}
-					looseStatus[i] = loosingAmount_PerDay[i] - winningAmount_PerDay[i];
-					if(looseStatus[i] > unluckiestDay) {
-						unluckiestDay = looseStatus[i];
+					if(winStack == STACK_PER_DAY / 2) {
+						winDays ++;
+						break;
+					}
+					if(looseStack == STACK_PER_DAY / 2) {
+						lostDays ++;
+						break;
 					}
 				}
-				System.out.println("Luckiest Day = "+luckiestDay);
-				System.out.println("Unlckiest Day = "+unluckiestDay);
+				
+				winningAmount_PerDay[i] = winStack;
+				loosingAmount_PerDay[i] = looseStack;
+				
+				
+				//System.out.println("Winnig Stack on Day"+(i+1)+" :  " +winStack);
+				//System.out.println("Loosing Stack on Day "+(i+1)+" : " +looseStack);
+				System.out.println("Winning Amount"+winningAmount_PerDay[i]);
+				System.out.println("Loosing Amount"+loosingAmount_PerDay[i]);
+				
+				
+				System.out.println("------------------------");
+				
+				}
+					System.out.println("Wining days in month "+winDays);
+					System.out.println("Loosing days in month "+lostDays);
+					
+					int luckiestDay = winStatus[0];
+					int unluckiestDay = looseStatus[0];
+					
+					
+					for(int i = 1; i < MONTHLY_STACK; i++) {
+						winStatus[i] = winningAmount_PerDay[i] - loosingAmount_PerDay[i];
+						if(winStatus[i] > luckiestDay) {
+							luckiestDay = winStatus[i];
+						}
+						if(winStatus[i] < unluckiestDay) {
+							unluckiestDay = winStatus[i];
+						}
+					}
+					System.out.println("Luckiest Day = "+luckiestDay);
+					System.out.println("Unlckiest Day = "+unluckiestDay);
+						
+					System.out.println("...............................................\n..................................................");
+					
+				System.out.print("Enter > 0 number :");
+				Scanner scanner = new Scanner(System.in);
+				playForNextMonth = scanner.nextInt();
+				
+		}
+	
+		while(playForNextMonth > 0 );
 		}
 		public static void main(String[] args) {
 			System.out.println("Welcome to Gambling Simulation Problem developed by Mohammad Husain");
